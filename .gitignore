@@ -1,0 +1,5 @@
+packages
+*.ncrunchsolution
+obj
+bin
+*.ncrunchproject
