@@ -7,13 +7,13 @@ namespace ParsingKata.Parser
   {
     private readonly IRules _rules;
     private readonly ParserReference _lowerLevelParser;
-    private readonly TokenMatcher _matcher;
+    private readonly ITokenMatcher<Operator?> _tokenMatcher;
 
-    public ExpressionCollector(IRules rules, ParserReference lowerLevelParser, TokenMatcher matcher)
+    public ExpressionCollector(IRules rules, ParserReference lowerLevelParser, ITokenMatcher<Operator?> tokenMatcher)
     {
       _rules = rules;
       _lowerLevelParser = lowerLevelParser;
-      _matcher = matcher;
+      _tokenMatcher = tokenMatcher;
     }
 
     public ExpressionList CollectExpressions(TokenSource source)
@@ -31,7 +31,7 @@ namespace ParsingKata.Parser
 
     private bool CollectTailExpression(TokenSource source, List<Operation> operations)
     {
-      var oper = _matcher(source);
+      var oper = _tokenMatcher.Match(source);
       if (oper.HasValue)
       {
         var currentExpression = _rules.Parse(_lowerLevelParser, source);

@@ -3,7 +3,7 @@ using NUnit.Framework;
 using ParsingKata.Ast;
 using ParsingKata.Parser;
 
-namespace ParsingKata.Specification.Parser
+namespace ParsingKata.Specification
 {
   public class ArithmeticParserSpecification
   {
@@ -63,6 +63,18 @@ namespace ParsingKata.Specification.Parser
             new MultiplyExpression(
                 new NumberExpression(3),
                 new NumberExpression(4)))
+        },
+        
+        new object[]
+        {
+          lexer.Tokenize("1*(2+3)*4"),
+          new MultiplyExpression( 
+            new MultiplyExpression(
+                new NumberExpression(1),
+                new AddExpression(
+                  new NumberExpression(2),
+                  new NumberExpression(3))),
+            new NumberExpression(4))
         },
       };
     }

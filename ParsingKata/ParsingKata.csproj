@@ -76,7 +76,9 @@
     <Compile Include="Parser\IExpressionCollector.cs" />
     <Compile Include="Parser\INodeFactory.cs" />
     <Compile Include="Parser\IParser.cs" />
+    <Compile Include="Parser\ITokenMatcher.cs" />
     <Compile Include="Parser\LeftAssociativeExpressionParser.cs" />
+    <Compile Include="Parser\OperatorMatcher.cs" />
     <Compile Include="Parser\Parser.cs" />
     <Compile Include="Parser\ParserReference.cs" />
     <Compile Include="Parser\Rules.cs" />
@@ -85,11 +87,12 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Parser\NodeFactory.cs" />
-    <Compile Include="Specification\Parser\ExpressionCollectorSpecification.cs" />
-    <Compile Include="Specification\Parser\ArithmeticParserSpecification.cs" />
-    <Compile Include="Specification\Parser\LeftAssociativeExpressionParserSpecification.cs" />
-    <Compile Include="Specification\Parser\RulesSpecification.cs" />
-    <Compile Include="Specification\Parser\UnaryParserSpecification.cs" />
+    <Compile Include="Specification\ExpressionCollectorSpecification.cs" />
+    <Compile Include="Specification\ArithmeticParserSpecification.cs" />
+    <Compile Include="Specification\LeftAssociativeExpressionParserSpecification.cs" />
+    <Compile Include="Specification\OperatorMatcherSpecification.cs" />
+    <Compile Include="Specification\RulesSpecification.cs" />
+    <Compile Include="Specification\UnaryParserSpecification.cs" />
     <Compile Include="Token.cs" />
     <Compile Include="Tokenizer.cs" />
     <Compile Include="TokenType.cs" />

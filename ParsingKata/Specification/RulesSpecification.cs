@@ -4,7 +4,7 @@ using ParsingKata.Ast;
 using ParsingKata.Parser;
 using TddEbook.TddToolkit;
 
-namespace ParsingKata.Specification.Parser
+namespace ParsingKata.Specification
 {
   public class RulesSpecification
   {

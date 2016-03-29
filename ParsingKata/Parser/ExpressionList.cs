@@ -6,7 +6,7 @@ namespace ParsingKata.Parser
   public class ExpressionList
   {
 
-    public ExpressionList(IExpression firstExpression, List<Operation> nextOperations)
+    public ExpressionList(IExpression firstExpression, IEnumerable<Operation> nextOperations)
     {
       FirstExpression = firstExpression;
       NextOperations = nextOperations;
@@ -19,17 +19,17 @@ namespace ParsingKata.Parser
   public class Operation
   {
     public IExpression Expression { get; }
-    public Operator Operator { get; }
+    public Operator Oper { get; }
 
-    public Operation(Operator @operator, IExpression ex)
+    public Operation(Operator oper, IExpression ex)
     {
-      Operator = @operator;
+      Oper = oper;
       Expression = ex;
     }
 
     protected bool Equals(Operation other)
     {
-      return Equals(Expression, other.Expression) && Operator == other.Operator;
+      return Equals(Expression, other.Expression) && Oper == other.Oper;
     }
 
     public override bool Equals(object obj)
@@ -44,7 +44,7 @@ namespace ParsingKata.Parser
     {
       unchecked
       {
-        return ((Expression != null ? Expression.GetHashCode() : 0)*397) ^ (int) Operator;
+        return ((Expression?.GetHashCode() ?? 0)*397) ^ (int) Oper;
       }
     }
 
@@ -60,7 +60,7 @@ namespace ParsingKata.Parser
 
     public IExpression CreateExpression(IExpression left, IBinaryExpressionFactory expressionFactory)
     {
-      return expressionFactory.CreateBinaryExpression(Operator, left, Expression);
+      return expressionFactory.CreateBinaryExpression(Oper, left, Expression);
     }
   }
 }

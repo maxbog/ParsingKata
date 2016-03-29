@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using NSubstitute;
 using NUnit.Framework;
@@ -7,7 +6,7 @@ using ParsingKata.Ast;
 using ParsingKata.Parser;
 using TddEbook.TddToolkit;
 
-namespace ParsingKata.Specification.Parser
+namespace ParsingKata.Specification
 {
   public class ExpressionCollectorSpecification
   {
@@ -18,15 +17,15 @@ namespace ParsingKata.Specification.Parser
       var firstExpression = Any.InstanceOf<IExpression>();
       var source = Any.InstanceOf<TokenSource>();
 
-      var matcher = Substitute.For<Func<TokenSource, Operator?>>();
-      matcher(source).Returns((Operator?) null);
+      var matcher = Substitute.For<ITokenMatcher<Operator?>>();
+      matcher.Match(source).Returns((Operator?) null);
 
       var rules = Substitute.For<IRules>();
       var lowerLevelParser = Any.InstanceOf<ParserReference>();
 
       rules.Parse(lowerLevelParser, source).Returns(firstExpression);
 
-      var collector = new ExpressionCollector(rules, lowerLevelParser, new TokenMatcher(matcher));
+      var collector = new ExpressionCollector(rules, lowerLevelParser, matcher);
 
       // WHEN
       ExpressionList result = collector.CollectExpressions(source);
@@ -45,14 +44,14 @@ namespace ParsingKata.Specification.Parser
       var secondExpression = Any.InstanceOf<IExpression>();
       var source = Any.InstanceOf<TokenSource>();
 
-      var matcher = Substitute.For<Func<TokenSource, Operator?>>();
-      matcher(source).Returns(oper, (Operator?)null);
+      var matcher = Substitute.For<ITokenMatcher<Operator?>>();
+      matcher.Match(source).Returns(oper, (Operator?)null);
 
       var rules = Substitute.For<IRules>();
       var lowerLevelParser = Any.InstanceOf<ParserReference>();
       rules.Parse(lowerLevelParser, source).Returns(firstExpression, secondExpression);
 
-      var collector = new ExpressionCollector(rules, lowerLevelParser, new TokenMatcher(matcher));
+      var collector = new ExpressionCollector(rules, lowerLevelParser, matcher);
 
       // WHEN
       ExpressionList result = collector.CollectExpressions(source);
@@ -79,14 +78,14 @@ namespace ParsingKata.Specification.Parser
       var firstExpression = Any.InstanceOf<IExpression>();
       var source = Any.InstanceOf<TokenSource>();
 
-      var matcher = Substitute.For<Func<TokenSource, Operator?>>();
-      matcher(source).Returns(expectedOperators.First(), expectedOperators.Skip(1).Concat(Enumerable.Repeat((Operator?)null, 1)).ToArray());
+      var matcher = Substitute.For<ITokenMatcher<Operator?>>();
+      matcher.Match(source).Returns(expectedOperators.First(), expectedOperators.Skip(1).Concat(Enumerable.Repeat((Operator?)null, 1)).ToArray());
       
       var rules = Substitute.For<IRules>();
       var lowerLevelParser = Any.InstanceOf<ParserReference>();
       rules.Parse(lowerLevelParser, source).Returns(firstExpression, expectedExpressions.ToArray());
 
-      var collector = new ExpressionCollector(rules, lowerLevelParser, new TokenMatcher(matcher));
+      var collector = new ExpressionCollector(rules, lowerLevelParser, matcher);
       // WHEN
       ExpressionList result = collector.CollectExpressions(source);
 
