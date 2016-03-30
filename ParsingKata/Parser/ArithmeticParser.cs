@@ -5,8 +5,8 @@ namespace ParsingKata.Parser
 {
   public class ArithmeticParser : IParser
   {
-    private readonly ParserReference _addRef;
     private readonly IRules _rules;
+    private readonly ParserReference _fullInputRef;
 
     public ArithmeticParser()
     {
@@ -14,11 +14,12 @@ namespace ParsingKata.Parser
       _rules = new Rules();
 
       var multRef = new ParserReference("mult");
-      _addRef = new ParserReference("add");
+      var addRef = new ParserReference("add");
       var unaryRef = new ParserReference("unary");
+      _fullInputRef = new ParserReference("fullInput");
 
       _rules.Add(
-        _addRef, 
+        addRef, 
         new LeftAssociativeExpressionParser(
           new ExpressionCollector(
             _rules, 
@@ -45,17 +46,18 @@ namespace ParsingKata.Parser
         new UnaryExpressionParser(
           nodeFactory,
           _rules,
-          _addRef
+          addRef
         )
+      );
+      _rules.Add(
+        _fullInputRef,
+        new FullInputParser(_rules, addRef)
       );
     }
 
     public IExpression Parse(TokenSource source)
     {
-      var parsed = _rules.Parse(_addRef, source);
-      if (!source.Eol)
-        return null;
-      return parsed;
+      return _rules.Parse(_fullInputRef, source);
     }
   }
 }

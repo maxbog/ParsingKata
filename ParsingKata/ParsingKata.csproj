@@ -62,6 +62,8 @@
     <Compile Include="Ast\MultiplyExpression.cs" />
     <Compile Include="Ast\NumberExpression.cs" />
     <Compile Include="Ast\SubtractExpression.cs" />
+    <Compile Include="Parser\FullInputParser.cs" />
+    <Compile Include="Specification\FullInputParserSpecification.cs" />
     <Compile Include="Tokenizer\ITokenSource.cs" />
     <Compile Include="Tokenizer\ListTokenSource.cs" />
     <Compile Include="Tokenizer\Operator.cs" />
