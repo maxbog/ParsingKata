@@ -3,13 +3,13 @@ using ParsingKata.Tokenizer;
 
 namespace ParsingKata.Parser
 {
-  public class UnaryExpressionParser : IParser
+  public class AtomExpressionParser : IParser
   {
     private readonly INodeFactory _nodeFactory;
     private readonly IRules _rules;
     private readonly ParserReference _topLevelParser;
 
-    public UnaryExpressionParser(INodeFactory nodeFactory, IRules rules, ParserReference topLevelParser)
+    public AtomExpressionParser(INodeFactory nodeFactory, IRules rules, ParserReference topLevelParser)
     {
       _nodeFactory = nodeFactory;
       _rules = rules;

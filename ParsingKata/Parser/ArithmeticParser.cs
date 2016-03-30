@@ -15,7 +15,7 @@ namespace ParsingKata.Parser
 
       var multRef = new ParserReference("mult");
       var addRef = new ParserReference("add");
-      var unaryRef = new ParserReference("unary");
+      var atomRef = new ParserReference("atom");
       _fullInputRef = new ParserReference("fullInput");
 
       _rules.Add(
@@ -35,15 +35,15 @@ namespace ParsingKata.Parser
         new LeftAssociativeExpressionParser(
           new ExpressionCollector(
             _rules, 
-            unaryRef,
+            atomRef,
             new OperatorMatcher(Operator.Times, Operator.Divide)),
           nodeFactory
         )
       );
 
       _rules.Add(
-        unaryRef, 
-        new UnaryExpressionParser(
+        atomRef, 
+        new AtomExpressionParser(
           nodeFactory,
           _rules,
           addRef

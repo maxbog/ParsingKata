@@ -8,7 +8,7 @@ using TddEbook.TddToolkit;
 
 namespace ParsingKata.Specification
 {
-  public class UnaryParserSpecification
+  public class AtomExpressionParserSpecification
   {
     [Test]
     public void ShouldParseNumberAsNumberExpression()
@@ -24,7 +24,7 @@ namespace ParsingKata.Specification
 
       var source = new ListTokenSource(new List<Token> {Token.Representing(number)});
 
-      var parser = new UnaryExpressionParser(nodeFactory, rules, topLevelParser);
+      var parser = new AtomExpressionParser(nodeFactory, rules, topLevelParser);
 
       // WHEN
       var actual = parser.Parse(source);
@@ -46,7 +46,7 @@ namespace ParsingKata.Specification
 
       INodeFactory nodeFactory = Substitute.For<INodeFactory>();
 
-      var parser = new UnaryExpressionParser(nodeFactory, rules, topLevelParser);
+      var parser = new AtomExpressionParser(nodeFactory, rules, topLevelParser);
 
       // WHEN
       var actual = parser.Parse(source);
@@ -68,7 +68,7 @@ namespace ParsingKata.Specification
 
       INodeFactory nodeFactory = Substitute.For<INodeFactory>();
 
-      var parser = new UnaryExpressionParser(nodeFactory, rules, topLevelParser);
+      var parser = new AtomExpressionParser(nodeFactory, rules, topLevelParser);
 
       // WHEN
       var actual = parser.Parse(source);
@@ -89,7 +89,7 @@ namespace ParsingKata.Specification
 
       INodeFactory nodeFactory = Substitute.For<INodeFactory>();
 
-      var parser = new UnaryExpressionParser(nodeFactory, rules, topLevelParser);
+      var parser = new AtomExpressionParser(nodeFactory, rules, topLevelParser);
 
       // WHEN
       var actual = parser.Parse(source);
@@ -111,7 +111,7 @@ namespace ParsingKata.Specification
       ParserReference topLevelParser = Any.InstanceOf<ParserReference>();
       IRules rules = Substitute.For<IRules>();
       INodeFactory nodeFactory = Substitute.For<INodeFactory>();
-      var parser = new UnaryExpressionParser(nodeFactory, rules, topLevelParser);
+      var parser = new AtomExpressionParser(nodeFactory, rules, topLevelParser);
 
       // WHEN
       var actual = parser.Parse(source);
