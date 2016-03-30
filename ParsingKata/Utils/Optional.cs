@@ -35,7 +35,7 @@ namespace ParsingKata.Utils
 
       return other();
     }
-
+    
     public Optional<T> Filter(Predicate<T> predicate)
     {
       return FlatMap(x => predicate(Get()) ? this : Empty);
@@ -51,9 +51,18 @@ namespace ParsingKata.Utils
     {
       return OrElseGet(() => { throw other(); });
     }
+
     public T OrElse(T other)
     {
       return OrElseGet(() => other);
+    }
+
+    public Optional<T> OrElseTry(Func<Optional<T>> other)
+    {
+      if (IsPresent)
+        return this;
+
+      return other();
     }
   }
 }
