@@ -1,4 +1,5 @@
 ﻿using System.Numerics;
+using ParsingKata.Utils;
 
 namespace ParsingKata.Tokenizer
 {
@@ -17,12 +18,12 @@ namespace ParsingKata.Tokenizer
     {
       Type = TokenType.Operator;
       NumberValue = null;
-      OperatorValue = operatorValue;
+      OperatorValue = Optional<Operator>.Of(operatorValue);
     }
     
     public BigInteger? NumberValue { get; }
 
-    public Operator? OperatorValue { get; }
+    public Optional<Operator> OperatorValue { get; }
 
     public static Token Representing(BigInteger value)
     {
@@ -36,7 +37,7 @@ namespace ParsingKata.Tokenizer
 
     private bool Equals(Token other)
     {
-      return Type == other.Type && NumberValue.Equals(other.NumberValue) && OperatorValue == other.OperatorValue;
+      return Type == other.Type && NumberValue.Equals(other.NumberValue) && OperatorValue.Equals(other.OperatorValue);
     }
 
     public override bool Equals(object obj)

@@ -24,22 +24,26 @@ namespace ParsingKata.Tokenizer
     }
 
 
-    private T MatchTokenType<T>(TokenType tokenType, Func<Token, T> func)
+    private Optional<T> MatchTokenType2<T>(TokenType tokenType, Func<Token, T> func)
     {
       return Current
         .Filter(current => current.Type == tokenType)
-        .Map(token => AdvanceAndReturn(func(token)))
-        .OrElse(default(T));
-    }
-    
-    public BigInteger? MatchNumber()
-    {
-      return MatchTokenType(TokenType.Number, current => current.NumberValue);
+        .Map(token => AdvanceAndReturn(func(token)));
     }
 
-    public Operator? MatchOperator()
+    public BigInteger? MatchNumber()
     {
-      return Optional<Operator>.OfNullable(MatchTokenType(TokenType.Operator, current => current.OperatorValue)).OrElse(null);
+      return  MatchTokenType2(TokenType.Number, current => current.NumberValue)
+        .OrElse(default(BigInteger?));
+    }
+
+    public Optional<Operator> MatchOperator()
+    {
+      Optional<Operator> value = MatchTokenType2(
+        TokenType.Operator, 
+        current => current.OperatorValue)
+        .OrElse(Optional<Operator>.Empty);
+      return value;
     }
   }
 }
