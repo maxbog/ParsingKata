@@ -38,12 +38,14 @@ namespace ParsingKata.Parser
 
       var innerExpression = _rules.Parse(_topLevelParser, source);
 
+      var optional = Optional<IExpression>.Empty;
+
       if (innerExpression == null)
-        return Optional<IExpression>.Empty.OrElse(null);
+        return optional.OrElse(null);
 
       if (!source.Match(
         Token.Representing(Operator.RightParen)).IsPresent)
-        return null;
+        return optional.OrElse(null);
 
       return innerExpression;
     }

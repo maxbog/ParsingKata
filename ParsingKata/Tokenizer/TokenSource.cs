@@ -39,7 +39,7 @@ namespace ParsingKata.Tokenizer
 
     public Operator? MatchOperator()
     {
-      return MatchTokenType(TokenType.Operator, current => current.OperatorValue);
+      return Optional<Operator>.OfNullable(MatchTokenType(TokenType.Operator, current => current.OperatorValue)).OrElse(null);
     }
   }
 }
