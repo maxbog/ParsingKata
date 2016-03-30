@@ -15,12 +15,12 @@ namespace ParsingKata.Tokenizer
       Advance();
       return value;
     }
-    public Token Match(Token token)
+
+    public Optional<Token> Match(Token token)
     {
       return Current
         .Filter(current => current == token)
-        .Map(AdvanceAndReturn)
-        .OrElse(null);
+        .Map(AdvanceAndReturn);
     }
 
 

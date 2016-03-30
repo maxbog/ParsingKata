@@ -1,5 +1,6 @@
 ﻿using ParsingKata.Ast;
 using ParsingKata.Tokenizer;
+using ParsingKata.Utils;
 
 namespace ParsingKata.Parser
 {
@@ -33,14 +34,15 @@ namespace ParsingKata.Parser
 
     private IExpression ParseInnerExpression(TokenSource source)
     {
-      source.Match(Token.Representing(Operator.LeftParen));
+      source.Match(Token.Representing(Operator.LeftParen)).OrElse(null);
 
       var innerExpression = _rules.Parse(_topLevelParser, source);
 
       if (innerExpression == null)
-        return null;
+        return Optional<IExpression>.Empty.OrElse(null);
 
-      if (source.Match(Token.Representing(Operator.RightParen)) == null)
+      if (!source.Match(
+        Token.Representing(Operator.RightParen)).IsPresent)
         return null;
 
       return innerExpression;
