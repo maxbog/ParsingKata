@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using ParsingKata.Ast;
+using ParsingKata.Tokenizer;
 
 namespace ParsingKata.Parser
 {
@@ -18,25 +19,25 @@ namespace ParsingKata.Parser
 
   public class Operation
   {
-    public IExpression Expression { get; }
-    public Operator Oper { get; }
+    private readonly IExpression _expression;
+    private readonly Operator _oper;
 
     public Operation(Operator oper, IExpression ex)
     {
-      Oper = oper;
-      Expression = ex;
+      _oper = oper;
+      _expression = ex;
     }
 
-    protected bool Equals(Operation other)
+    private bool Equals(Operation other)
     {
-      return Equals(Expression, other.Expression) && Oper == other.Oper;
+      return Equals(_expression, other._expression) && _oper == other._oper;
     }
 
     public override bool Equals(object obj)
     {
       if (ReferenceEquals(null, obj)) return false;
       if (ReferenceEquals(this, obj)) return true;
-      if (obj.GetType() != this.GetType()) return false;
+      if (obj.GetType() != GetType()) return false;
       return Equals((Operation) obj);
     }
 
@@ -44,7 +45,7 @@ namespace ParsingKata.Parser
     {
       unchecked
       {
-        return ((Expression?.GetHashCode() ?? 0)*397) ^ (int) Oper;
+        return ((_expression?.GetHashCode() ?? 0)*397) ^ (int) _oper;
       }
     }
 
@@ -60,7 +61,7 @@ namespace ParsingKata.Parser
 
     public IExpression CreateExpression(IExpression left, IBinaryExpressionFactory expressionFactory)
     {
-      return expressionFactory.CreateBinaryExpression(Oper, left, Expression);
+      return expressionFactory.CreateBinaryExpression(_oper, left, _expression);
     }
   }
 }

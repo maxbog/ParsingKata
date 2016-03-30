@@ -1,4 +1,4 @@
-﻿namespace ParsingKata
+﻿namespace ParsingKata.Tokenizer
 {
   public enum Operator
   {

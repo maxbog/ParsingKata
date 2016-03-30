@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Numerics;
 
-namespace ParsingKata
+namespace ParsingKata.Tokenizer
 {
   public class Tokenizer
   {

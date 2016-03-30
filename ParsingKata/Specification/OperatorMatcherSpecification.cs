@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using NUnit.Framework;
 using ParsingKata.Parser;
+using ParsingKata.Tokenizer;
 using TddEbook.TddToolkit;
 
 namespace ParsingKata.Specification

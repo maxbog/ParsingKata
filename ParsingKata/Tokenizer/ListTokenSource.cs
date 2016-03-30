@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using ParsingKata.Utils;
 
-namespace ParsingKata
+namespace ParsingKata.Tokenizer
 {
   public class ListTokenSource : TokenSource
   {
@@ -14,7 +14,7 @@ namespace ParsingKata
       _currentToken = 0;
     }
 
-    public override void Advance() => _currentToken++;
+    protected override void Advance() => _currentToken++;
 
     public override Optional<Token> Current => Eol ? Optional<Token>.Empty : Optional<Token>.Of(_input[_currentToken]);
 

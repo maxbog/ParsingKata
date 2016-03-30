@@ -2,25 +2,25 @@ namespace ParsingKata.Ast
 {
   public abstract class BinaryExpression : IExpression
   {
-    private readonly IExpression _left;
-    private readonly IExpression _right;
+    protected readonly IExpression Left;
+    protected readonly IExpression Right;
 
     protected BinaryExpression(IExpression left, IExpression right)
     {
-      _left = left;
-      _right = right;
+      Left = left;
+      Right = right;
     }
 
-    protected bool Equals(BinaryExpression other)
+    private bool Equals(BinaryExpression other)
     {
-      return Equals(_left, other._left) && Equals(_right, other._right);
+      return Equals(Left, other.Left) && Equals(Right, other.Right);
     }
 
     public override bool Equals(object obj)
     {
       if (ReferenceEquals(null, obj)) return false;
       if (ReferenceEquals(this, obj)) return true;
-      if (obj.GetType() != this.GetType()) return false;
+      if (obj.GetType() != GetType()) return false;
       return Equals((BinaryExpression) obj);
     }
 
@@ -28,7 +28,7 @@ namespace ParsingKata.Ast
     {
       unchecked
       {
-        return ((_left != null ? _left.GetHashCode() : 0)*397) ^ (_right != null ? _right.GetHashCode() : 0);
+        return ((Left?.GetHashCode() ?? 0)*397) ^ (Right?.GetHashCode() ?? 0);
       }
     }
 

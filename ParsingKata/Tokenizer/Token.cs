@@ -1,6 +1,6 @@
 ﻿using System.Numerics;
 
-namespace ParsingKata
+namespace ParsingKata.Tokenizer
 {
   public class Token
   {
@@ -34,7 +34,7 @@ namespace ParsingKata
       return new Token(value);
     }
 
-    protected bool Equals(Token other)
+    private bool Equals(Token other)
     {
       return Type == other.Type && NumberValue.Equals(other.NumberValue) && OperatorValue == other.OperatorValue;
     }
@@ -43,7 +43,7 @@ namespace ParsingKata
     {
       if (ReferenceEquals(null, obj)) return false;
       if (ReferenceEquals(this, obj)) return true;
-      if (obj.GetType() != this.GetType()) return false;
+      if (obj.GetType() != GetType()) return false;
       return Equals((Token) obj);
     }
 

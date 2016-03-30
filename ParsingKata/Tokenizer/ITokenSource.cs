@@ -2,11 +2,11 @@
 using System.Numerics;
 using ParsingKata.Utils;
 
-namespace ParsingKata
+namespace ParsingKata.Tokenizer
 {
   public abstract class TokenSource
   {
-    public abstract void Advance();
+    protected abstract void Advance();
     public abstract Optional<Token> Current { get; }
     public abstract bool Eol { get; }
 

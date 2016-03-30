@@ -1,4 +1,6 @@
-﻿namespace ParsingKata.Parser
+﻿using ParsingKata.Tokenizer;
+
+namespace ParsingKata.Parser
 {
   public interface ITokenMatcher<out T>
   {

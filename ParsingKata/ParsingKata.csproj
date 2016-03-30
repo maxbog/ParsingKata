@@ -41,10 +41,6 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Collections.Immutable, Version=1.1.37.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Collections.Immutable.1.1.37\lib\dotnet\System.Collections.Immutable.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System.Core" />
     <Reference Include="System.Numerics" />
     <Reference Include="System.Xml.Linq" />
@@ -64,10 +60,11 @@
     <Compile Include="Ast\DivideExpression.cs" />
     <Compile Include="Ast\IExpression.cs" />
     <Compile Include="Ast\MultiplyExpression.cs" />
+    <Compile Include="Ast\NumberExpression.cs" />
     <Compile Include="Ast\SubtractExpression.cs" />
-    <Compile Include="ITokenSource.cs" />
-    <Compile Include="ListTokenSource.cs" />
-    <Compile Include="Operator.cs" />
+    <Compile Include="Tokenizer\ITokenSource.cs" />
+    <Compile Include="Tokenizer\ListTokenSource.cs" />
+    <Compile Include="Tokenizer\Operator.cs" />
     <Compile Include="Parser\ExpressionCollector.cs" />
     <Compile Include="Parser\ExpressionList.cs" />
     <Compile Include="Parser\IRules.cs" />
@@ -79,10 +76,8 @@
     <Compile Include="Parser\ITokenMatcher.cs" />
     <Compile Include="Parser\LeftAssociativeExpressionParser.cs" />
     <Compile Include="Parser\OperatorMatcher.cs" />
-    <Compile Include="Parser\Parser.cs" />
     <Compile Include="Parser\ParserReference.cs" />
     <Compile Include="Parser\Rules.cs" />
-    <Compile Include="Parser\TokenMatcher.cs" />
     <Compile Include="Parser\UnaryExpressionParser.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -93,9 +88,9 @@
     <Compile Include="Specification\OperatorMatcherSpecification.cs" />
     <Compile Include="Specification\RulesSpecification.cs" />
     <Compile Include="Specification\UnaryParserSpecification.cs" />
-    <Compile Include="Token.cs" />
-    <Compile Include="Tokenizer.cs" />
-    <Compile Include="TokenType.cs" />
+    <Compile Include="Tokenizer\Token.cs" />
+    <Compile Include="Tokenizer\Tokenizer.cs" />
+    <Compile Include="Tokenizer\TokenType.cs" />
     <Compile Include="Utils\Empty.cs" />
     <Compile Include="Utils\Optional.cs" />
     <Compile Include="Utils\Some.cs" />

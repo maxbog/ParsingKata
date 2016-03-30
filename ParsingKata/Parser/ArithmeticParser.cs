@@ -1,5 +1,5 @@
-﻿using System;
-using ParsingKata.Ast;
+﻿using ParsingKata.Ast;
+using ParsingKata.Tokenizer;
 
 namespace ParsingKata.Parser
 {
@@ -13,9 +13,9 @@ namespace ParsingKata.Parser
       INodeFactory nodeFactory = new NodeFactory();
       _rules = new Rules();
 
-      var multRef = new ParserReference();
-      _addRef = new ParserReference();
-      var unaryRef = new ParserReference();
+      var multRef = new ParserReference("mult");
+      _addRef = new ParserReference("add");
+      var unaryRef = new ParserReference("unary");
 
       _rules.Add(
         _addRef, 
@@ -52,7 +52,10 @@ namespace ParsingKata.Parser
 
     public IExpression Parse(TokenSource source)
     {
-      return _rules.Parse(_addRef, source);
+      var parsed = _rules.Parse(_addRef, source);
+      if (!source.Eol)
+        return null;
+      return parsed;
     }
   }
 }

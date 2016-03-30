@@ -5,5 +5,11 @@ namespace ParsingKata.Ast
     public MultiplyExpression(IExpression left, IExpression right) : base(left, right)
     {
     }
+
+
+    public override string ToString()
+    {
+      return $"[Mul {Left} {Right}]";
+    }
   }
 }

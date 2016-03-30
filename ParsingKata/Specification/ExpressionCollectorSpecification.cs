@@ -4,6 +4,7 @@ using NSubstitute;
 using NUnit.Framework;
 using ParsingKata.Ast;
 using ParsingKata.Parser;
+using ParsingKata.Tokenizer;
 using TddEbook.TddToolkit;
 
 namespace ParsingKata.Specification

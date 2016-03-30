@@ -5,5 +5,9 @@ namespace ParsingKata.Ast
     public DivideExpression(IExpression left, IExpression right) : base(left, right)
     {
     }
+    public override string ToString()
+    {
+      return $"[Div {Left} {Right}]";
+    }
   }
 }

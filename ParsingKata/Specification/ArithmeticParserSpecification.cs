@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using ParsingKata.Ast;
 using ParsingKata.Parser;
+using ParsingKata.Tokenizer;
 
 namespace ParsingKata.Specification
 {
@@ -22,7 +23,7 @@ namespace ParsingKata.Specification
 
     public object[][] ParserCaseSource()
     {
-      Tokenizer lexer = new Tokenizer();
+      Tokenizer.Tokenizer lexer = new Tokenizer.Tokenizer();
       return new[]
       {
         new object[] 
@@ -75,6 +76,18 @@ namespace ParsingKata.Specification
                   new NumberExpression(2),
                   new NumberExpression(3))),
             new NumberExpression(4))
+        },
+
+        new object[]
+        {
+          lexer.Tokenize("1*+"),
+          null
+        },
+
+        new object[]
+        {
+          lexer.Tokenize("1 2"),
+          null
         },
       };
     }
